@@ -1,11 +1,10 @@
 // import React, { useEffect } from 'react';
-import React from "react";
+import React, {useEffect} from "react";
 import { capitalizeFirstLetter } from '../../utils/helpers';
 
 
 
 function Nav(props){
-
   const {
     categories= [],
     setCurrentCategory,
@@ -14,9 +13,9 @@ function Nav(props){
     setContactSelected
   } = props;
 
-  // useEffect(() => {
-  //   document.title = capitalizeFirstLetter(currentCategory.name);
-  // }, [currentCategory]);
+  useEffect(() => {
+    document.title = capitalizeFirstLetter(currentCategory.name);
+  }, [currentCategory]);
   // const handleClick = (item) => {
   //   console.log(item);
   //   return item;
