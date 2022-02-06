@@ -1,71 +1,81 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import { validateEmail } from '../../utils/helpers';
+import { validateEmail } from "../../utils/helpers";
 
-function ContactForm(){
-  
+function ContactForm() {
   // Hook to manage form data
-  const [formState, setFormState] = useState({ name: '', email: '', message: ''});
+  const [formState, setFormState] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
   // Define the error message
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
   // Destructure the formState object
   const { name, email, message } = formState;
 
-
-
-  function handleSubmit(e){
+  function handleSubmit(e) {
     e.preventDefault();
-    if(!errorMessage){
-      setFormState({ [e.target.name]: e.target.value })
-      console.log('Form', formState);
+    if (!errorMessage) {
+      setFormState({ [e.target.name]: e.target.value });
+      console.log("Form", formState);
     }
-  };
-
-
-    
-  // console.log('errorMessage', errorMessage);
-  
+  }
 
   // Define the handleChange function
-  function handleChange(e){
-    if (e.target.name === 'email'){
+  function handleChange(e) {
+    if (e.target.name === "email") {
       const isValid = validateEmail(e.target.value);
-      console.log(isValid); 
+      console.log(isValid);
 
       // isValid conditional statement
-      if(!isValid){
-        setErrorMessage('Your email address is invalid');
+      if (!isValid) {
+        setErrorMessage("Your email address is invalid");
       } else {
-        setErrorMessage('');
-      } 
+        setErrorMessage("");
+      }
     } else {
-      if(!e.target.value.length){
+      if (!e.target.value.length) {
         setErrorMessage(`${e.target.name} is required`);
       } else {
-        setErrorMessage('');
+        setErrorMessage("");
       }
     }
-  };
+  }
   // console.log(formState);
 
-
-  return(
+  return (
     <section>
       <h1>Contact me</h1>
       <form id="contact-form" onSubmit={handleSubmit}>
         <div>
           <label htmlFor="name">Name</label>
-          <input type="text" defaultValue={name} onBlur={handleChange} name="name"/>
+          <input
+            type="text"
+            defaultValue={name}
+            onBlur={handleChange}
+            name="name"
+          />
         </div>
 
         <div>
           <label htmlFor="email">Email Address:</label>
-          <input type="email" defaultValue={email}  name="email" onBlur={handleChange}/>
+          <input
+            type="email"
+            defaultValue={email}
+            name="email"
+            onBlur={handleChange}
+          />
         </div>
 
         <div>
           <label htmlFor="message">Message:</label>
-          <textarea name="message" defaultValue={message} onBlur={handleChange} rows="5" />
+          <textarea
+            name="message"
+            defaultValue={message}
+            onBlur={handleChange}
+            rows="5"
+          />
         </div>
 
         {errorMessage && (
@@ -77,7 +87,7 @@ function ContactForm(){
         <button type="submit">Submit</button>
       </form>
     </section>
-  )
+  );
 }
 
 export default ContactForm;
